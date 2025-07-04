@@ -1,0 +1,87 @@
+<?php
+// sonuc.php
+
+session_start();
+
+// Güvenlik: Eğer skoru veya soru ID'leri session'da yoksa, 
+// kullanıcı bu sayfaya doğrudan gelmiş demektir. Onu ana sayfaya yönlendir.
+if (!isset($_SESSION['skor']) || !isset($_SESSION['soru_ids'])) {
+    header("Location: index.php");
+    exit();
+}
+
+// Session'dan skor ve toplam soru sayısını alalım.
+$skor = $_SESSION['skor'];
+$toplam_soru = count($_SESSION['soru_ids']);
+
+// Başarı yüzdesini hesaplayalım.
+// Toplam soru sıfırsa, sıfıra bölünme hatası almamak için kontrol edelim.
+$basari_yuzdesi = ($toplam_soru > 0) ? round(($skor / $toplam_soru) * 100) : 0;
+
+// Sonuçları gösterdikten sonra, yeni bir quiz'e başlanabilmesi için
+// quiz ile ilgili oturum verilerini temizliyoruz.
+// session_destroy() tüm oturumu yok eder.
+session_destroy();
+
+?>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Sonucu</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .result-container {
+            text-align: center;
+            max-width: 600px;
+        }
+        .result-container h2 {
+            font-size: 2.5em;
+            color: #007bff;
+        }
+        .score {
+            font-size: 1.5em;
+            margin: 20px 0;
+        }
+        .score span {
+            font-weight: bold;
+            font-size: 2em;
+            color: <?php echo ($basari_yuzdesi >= 50) ? '#28a745' : '#d9534f'; ?>; /* Başarıya göre renk */
+        }
+        .play-again-button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .play-again-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container result-container">
+        <h2>Tebrikler, Quizi Tamamladınız!</h2>
+        
+        <div class="score">
+            Toplam <strong><?php echo $toplam_soru; ?></strong> sorudan <strong><?php echo $skor; ?></strong> tanesini doğru bildiniz.
+        </div>
+
+        <div class="score">
+            Başarı Yüzdeniz: <br><span><?php echo $basari_yuzdesi; ?>%</span>
+        </div>
+        
+        <a href="index.php" class="play-again-button">Tekrar Oyna</a>
+    </div>
+
+</body>
+</html>
