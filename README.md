@@ -51,15 +51,15 @@ Bu projeyi kendi yerel sunucunuzda çalıştırmak için aşağıdaki adımları
 
   - PHP 7.4 veya üstü
   - MySQL veya MariaDB veritabanı
-  - XAMPP, WAMP veya MAMP gibi bir yerel sunucu ortamı
+  - XAMPP, WAMP veya MAMP gibi bir yerel sunucu ortamı (Windows için), ya da php -S [port] (Genel yöntem)
 
 ### Adım Adım Kurulum
 
 1.  **Projeyi Klonlayın veya İndirin:**
 
     ```bash
-    git clone https://github.com/KULLANICI_ADINIZ/PROJE_ADINIZ.git
-    cd PROJE_ADINIZ
+    git clone https://github.com/kadiryildiz283/Quiz-App/
+    cd Quiz-App
     ```
 
 2.  **Veritabanını Oluşturun:**
@@ -143,6 +143,4 @@ Bu proje MIT Lisansı ile lisanslanmıştır. Detaylar için `LICENSE` dosyasın
 
 ## 📬 İletişim
 
-[Adınız Soyadınız] - [email@adresiniz.com]
-
-Proje Linki: [https://github.com/KULLANICI\_ADINIZ/PROJE\_ADINIZ](https://www.google.com/search?q=https://github.com/KULLANICI_ADINIZ/PROJE_ADINIZ)
+kadir yıldız - dev@kadiryildiz.com.tr
